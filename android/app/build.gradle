@@ -1,0 +1,54 @@
+// This block should come first
+buildscript {
+    ext.kotlin_version = '1.9.0'  // Update to Kotlin 1.9.0
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.15'  // If you're using Google services
+    }
+}
+
+// This block should come after buildscript
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+
+}
+
+android {
+    namespace = "com.example.pmpml_map"
+    compileSdk = 34  // Ensure this matches the latest stable SDK version
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    defaultConfig {
+        applicationId = "com.example.pmpml_map"
+        minSdk = 21
+        targetSdk = 34  // Ensure this matches the latest stable target SDK
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
